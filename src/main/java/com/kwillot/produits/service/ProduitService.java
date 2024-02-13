@@ -1,23 +1,27 @@
 package com.kwillot.produits.service;
 
+import com.kwillot.produits.dto.ProduitDTO;
 import com.kwillot.produits.entities.Categorie;
 import com.kwillot.produits.entities.Produit;
 
 import java.util.List;
 
 public interface ProduitService {
+    ProduitDTO convertEntityToDto(Produit produit);
 
-    Produit saveProduit(Produit p);
+    Produit convertDtoToEntity(ProduitDTO produitDto);
 
-    Produit updateProduit(Produit p);
+    ProduitDTO saveProduit(ProduitDTO p);
+
+    ProduitDTO updateProduit(ProduitDTO p);
 
     void deleteProduit(Produit p);
 
     void deleteProduitById(Long id);
 
-    Produit getProduit(Long id);
+    ProduitDTO getProduit(Long id);
 
-    List<Produit> getAllProduits();
+    List<ProduitDTO> getAllProduits();
 
     List<Produit> findByNomProduit(String nom);
 
