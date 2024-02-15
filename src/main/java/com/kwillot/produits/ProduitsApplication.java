@@ -1,5 +1,6 @@
 package com.kwillot.produits;
 
+import com.kwillot.produits.entities.Categorie;
 import com.kwillot.produits.entities.Produit;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class ProduitsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        repositoryRestConfiguration.exposeIdsFor(Produit.class);
+        repositoryRestConfiguration.exposeIdsFor(Produit.class, Categorie.class);
     }
 
     @Bean
