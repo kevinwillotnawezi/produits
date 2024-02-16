@@ -15,27 +15,28 @@ public class ProduitRestController {
     @Autowired
     ProduitService produitService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(path = "all", method = RequestMethod.GET)
     public List<ProduitDTO> getAllProduits() {
         return produitService.getAllProduits();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getbyid/{id}")
     public ProduitDTO getProduitById(@PathVariable("id") Long id) {
         return produitService.getProduit(id);
     }
 
-    @PostMapping
+    @PostMapping("/addprod")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public ProduitDTO createProduit(@RequestBody ProduitDTO produit) {
         return produitService.saveProduit(produit);
     }
 
-    @PutMapping
+    @PutMapping("/updateprod")
     public ProduitDTO updateProduit(@RequestBody ProduitDTO produit) {
         return produitService.updateProduit(produit);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delprod/{id}")
     public void deleteProduit(@PathVariable("id") Long id) {
         produitService.deleteProduitById(id);
     }

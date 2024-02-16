@@ -7,6 +7,7 @@ import com.kwillot.produits.repos.ProduitRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class ProduitServiceImpl implements ProduitService {
         .build();*/
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public ProduitDTO saveProduit(ProduitDTO p) {
         return convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
