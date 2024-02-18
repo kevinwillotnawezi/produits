@@ -11,17 +11,21 @@ public interface ProduitService {
 
     Produit convertDtoToEntity(ProduitDTO produitDto);
 
-    ProduitDTO saveProduit(ProduitDTO p);
+    //    ProduitDTO saveProduit(ProduitDTO p);
+    Produit saveProduit(Produit p);
 
-    ProduitDTO updateProduit(ProduitDTO p);
+    //    ProduitDTO updateProduit(ProduitDTO p);
+    Produit updateProduit(Produit p);
 
     void deleteProduit(Produit p);
 
     void deleteProduitById(Long id);
 
-    ProduitDTO getProduit(Long id);
+    //    ProduitDTO getProduit(Long id);
+    Produit getProduit(Long id);
 
-    List<ProduitDTO> getAllProduits();
+    //    List<ProduitDTO> getAllProduits();
+    List<Produit> getAllProduits();
 
     List<Produit> findByNomProduit(String nom);
 

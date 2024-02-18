@@ -1,6 +1,5 @@
 package com.kwillot.produits.restControllers;
 
-import com.kwillot.produits.dto.ProduitDTO;
 import com.kwillot.produits.entities.Produit;
 import com.kwillot.produits.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +14,25 @@ public class ProduitRestController {
     @Autowired
     ProduitService produitService;
 
+    //TODO DTO
     @RequestMapping(path = "all", method = RequestMethod.GET)
-    public List<ProduitDTO> getAllProduits() {
+    public List<Produit> getAllProduits() {
         return produitService.getAllProduits();
     }
 
     @GetMapping("/getbyid/{id}")
-    public ProduitDTO getProduitById(@PathVariable("id") Long id) {
+    public Produit getProduitById(@PathVariable("id") Long id) {
         return produitService.getProduit(id);
     }
 
     @PostMapping("/addprod")
 //    @PreAuthorize("hasAuthority('ADMIN')")
-    public ProduitDTO createProduit(@RequestBody ProduitDTO produit) {
+    public Produit createProduit(@RequestBody Produit produit) {
         return produitService.saveProduit(produit);
     }
 
     @PutMapping("/updateprod")
-    public ProduitDTO updateProduit(@RequestBody ProduitDTO produit) {
+    public Produit updateProduit(@RequestBody Produit produit) {
         return produitService.updateProduit(produit);
     }
 

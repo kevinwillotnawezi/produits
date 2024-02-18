@@ -3,7 +3,6 @@ package com.kwillot.produits.security;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,14 +34,14 @@ public class SecurityConfig {
                         return cors;
                     }
                 }))
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/api/getbyid/**").hasAnyAuthority("ADMIN", "USER")
-//                        .requestMatchers(HttpMethod.POST, "/api/addprod/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/updateprod/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/delprod/**").hasAuthority("ADMIN")
-                        .anyRequest().authenticated())
-//                .addFilterBefore(new JWTAuthenticationFilter (authMgr), UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(
+                        requests -> requests
+//                                .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.GET, "/api/getbyid/**").hasAnyAuthority("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.POST, "/api/addprod/**").hasAnyAuthority("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/api/updateprod/**").hasAuthority("ADMIN")
+//                                .requestMatchers(HttpMethod.DELETE, "/api/delprod/**").hasAuthority("ADMIN")
+                                .anyRequest().authenticated())
                 .addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

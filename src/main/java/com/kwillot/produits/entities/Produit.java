@@ -21,6 +21,10 @@ public class Produit {
     private Date dateCreation;
     @ManyToOne
     private Categorie categorie;
+    @OneToOne
+    private Image image;
+////    @OneToMany //(mappedBy = "produit")
+////    private List<Image> images;
 
     public Produit(String nomProduit, Double prixProduit, Date dateCreation) {
         this.nomProduit = nomProduit;

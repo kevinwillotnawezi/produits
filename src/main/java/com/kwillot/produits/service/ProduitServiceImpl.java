@@ -11,28 +11,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProduitServiceImpl implements ProduitService {
     @Autowired
     ProduitRepository produitRepository;
 
+//    @Autowired
+//    ImageRepository imageRepository;
+
     @Autowired
     ModelMapper modelMapper;
-
-    @Override
-    public Produit convertDtoToEntity(ProduitDTO produitDto) {
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        return modelMapper.map(produitDto, Produit.class);
-//        Produit produit = new Produit();
-//        produit.setId(produitDto.getIdProduit());
-//        produit.setNomProduit(produitDto.getNomProduit());
-//        produit.setPrixProduit(produitDto.getPrixProduit());
-//        produit.setDateCreation(produitDto.getDateCreation());
-//        produit.setCategorie(produitDto.getCategorie());
-//        return produit;
-    }
 
     @Override
     public ProduitDTO convertEntityToDto(Produit produit) {
@@ -53,16 +42,38 @@ public class ProduitServiceImpl implements ProduitService {
         .categorie(produit.getCategorie())
         .build();*/
     }
+//    public ProduitDTO updateProduit(ProduitDTO p) {
+//        return convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
+//    }
+
+    @Override
+    public Produit convertDtoToEntity(ProduitDTO produitDto) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        return modelMapper.map(produitDto, Produit.class);
+//        Produit produit = new Produit();
+//        produit.setId(produitDto.getIdProduit());
+//        produit.setNomProduit(produitDto.getNomProduit());
+//        produit.setPrixProduit(produitDto.getPrixProduit());
+//        produit.setDateCreation(produitDto.getDateCreation());
+//        produit.setCategorie(produitDto.getCategorie());
+//        return produit;
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @Override
-    public ProduitDTO saveProduit(ProduitDTO p) {
-        return convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
+    public Produit saveProduit(Produit p) {
+        return produitRepository.save(p);
     }
 
     @Override
-    public ProduitDTO updateProduit(ProduitDTO p) {
-        return convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
+    public Produit updateProduit(Produit p) {
+//        return produitRepository.save(p);
+//        Long oldProdImageId = this.getProduit(p.getId()).getImages().getIdImage();
+//        Long newProdImageId = p.getImage().getIdImage();
+        Produit prodUpdated = produitRepository.save(p);
+//        if (oldProdImageId != newProdImageId) //si l'image a été modifiée
+//            imageRepository.deleteById(oldProdImageId);
+        return prodUpdated;
     }
 
     @Override
@@ -74,15 +85,21 @@ public class ProduitServiceImpl implements ProduitService {
     public void deleteProduitById(Long id) {
         produitRepository.deleteById(id);
     }
+//    public ProduitDTO getProduit(Long id) {
+//        return convertEntityToDto(produitRepository.findById(id).get());
+//    }
 
     @Override
-    public ProduitDTO getProduit(Long id) {
-        return convertEntityToDto(produitRepository.findById(id).get());
+    public Produit getProduit(Long id) {
+        return produitRepository.findById(id).get();
     }
+//    public List<ProduitDTO> getAllProduits() {
+//        return produitRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+//    }
 
     @Override
-    public List<ProduitDTO> getAllProduits() {
-        return produitRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+    public List<Produit> getAllProduits() {
+        return produitRepository.findAll();
     }
 
     @Override
