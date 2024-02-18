@@ -83,6 +83,13 @@ public class ProduitServiceImpl implements ProduitService {
 
     @Override
     public void deleteProduitById(Long id) {
+//        Produit p = getProduit(id);
+////suuprimer l'image avant de supprimer le produit
+//        try {
+//            Files.delete(Paths.get(System.getProperty("user.home")+"/images/"+p.getImagePath()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         produitRepository.deleteById(id);
     }
 //    public ProduitDTO getProduit(Long id) {

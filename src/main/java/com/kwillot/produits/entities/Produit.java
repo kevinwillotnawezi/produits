@@ -23,8 +23,9 @@ public class Produit {
     private Categorie categorie;
     @OneToOne
     private Image image;
-////    @OneToMany //(mappedBy = "produit")
+    ////    @OneToMany //(mappedBy = "produit")
 ////    private List<Image> images;
+    private String imagePath;
 
     public Produit(String nomProduit, Double prixProduit, Date dateCreation) {
         this.nomProduit = nomProduit;
